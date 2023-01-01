@@ -1,4 +1,4 @@
-package com.example.spacexrockets.models
+package com.example.spacexrockets.models.rocketlist
 
 data class SecondStage(
     var burn_time_sec: Int,

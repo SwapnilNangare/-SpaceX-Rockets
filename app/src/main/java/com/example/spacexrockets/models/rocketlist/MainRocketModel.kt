@@ -1,3 +1,3 @@
-package com.example.spacexrockets.models
+package com.example.spacexrockets.models.rocketlist
 
 class MainRocketModel : ArrayList<MainRocketModelItem>()

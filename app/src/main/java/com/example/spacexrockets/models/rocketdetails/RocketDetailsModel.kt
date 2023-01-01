@@ -1,6 +1,6 @@
-package com.example.spacexrockets.models
+package com.example.spacexrockets.models.rocketdetails
 
-data class MainRocketModelItem(
+data class RocketDetailsModel(
     var active: Boolean,
     var boosters: Int,
     var company: String,

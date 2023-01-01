@@ -1,4 +1,4 @@
-package com.example.spacexrockets.models
+package com.example.spacexrockets.models.rocketlist
 
 data class CompositeFairing(
     var diameter: Diameter,

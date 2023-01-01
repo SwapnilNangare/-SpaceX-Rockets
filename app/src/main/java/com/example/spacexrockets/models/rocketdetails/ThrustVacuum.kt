@@ -1,4 +1,4 @@
-package com.example.spacexrockets.models
+package com.example.spacexrockets.models.rocketdetails
 
 data class ThrustVacuum(
     var kN: Int,
