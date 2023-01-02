@@ -12,8 +12,6 @@ import java.io.IOException
 class RocketRepository(private val getRockets: GetRocketService) {
 
     val rocketsLiveData: MutableLiveData<Resource<MainRocketModel>> = MutableLiveData()
-
-
     private val rocketsDetailsLiveData = MutableLiveData<RocketDetailsModel>()
     val rocketsInformationDetails: LiveData<RocketDetailsModel>
         get() = rocketsDetailsLiveData
