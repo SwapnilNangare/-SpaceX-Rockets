@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.spacexrockets.R
 import com.example.spacexrockets.adapter.RocketAdapter
-import com.example.spacexrockets.adapter.ViewPagerAdapter
 import com.example.spacexrockets.api.GetRocketService
 import com.example.spacexrockets.api.RetrofitHelper
 import com.example.spacexrockets.repository.RocketRepository
@@ -24,27 +23,17 @@ class MainActivity : AppCompatActivity() {
     lateinit var rocketViewModel: RocketViewModel
     lateinit var adapter: RocketAdapter
 
-    lateinit var viewPagerAdapter: ViewPagerAdapter
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupUI()
         val getRockets = RetrofitHelper.getInstance().create(GetRocketService::class.java)
         val repository = RocketRepository(getRockets)
-        rocketViewModel = ViewModelProvider(
-            this,
-            RocketViewModelFactory(repository)
-        )[RocketViewModel::class.java]
-
+        rocketViewModel =
+            ViewModelProvider(this, RocketViewModelFactory(repository))[RocketViewModel::class.java]
         setupObservers()
 
     }
-
-
-
 
     private fun setupUI() {
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -67,14 +56,14 @@ class MainActivity : AppCompatActivity() {
                         adapter = RocketAdapter(
                             this,
                             rockets,
-                        ) { rocketId ->
+
+                            ) { rocketId ->
                             nextActivity(rocketId)
                         }
                     }
                     recyclerView.adapter = adapter
                 }
             }
-
         })
     }
 

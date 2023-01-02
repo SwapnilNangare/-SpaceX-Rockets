@@ -11,7 +11,10 @@ import com.bumptech.glide.Glide
 import com.example.spacexrockets.R
 import java.util.*
 
-class ViewPagerAdapter(val context: Context, val imageList: List<String>) : PagerAdapter() {
+class ViewPagerAdapter(
+    val context: Context, val imageList: List<String>,
+    private val onClickListener: () -> Unit
+) : PagerAdapter() {
     override fun getCount(): Int {
         return imageList.size
     }
@@ -29,11 +32,13 @@ class ViewPagerAdapter(val context: Context, val imageList: List<String>) : Page
         val itemView: View = mLayoutInflater.inflate(R.layout.image_slider_item, container, false)
         val imageView: ImageView = itemView.findViewById<View>(R.id.idIVImage) as ImageView
 
-        //imageView.setImageResource(imageList.get(position))
+        imageView.setOnClickListener {
+            onClickListener.invoke()
+        }
 
         Glide.with(context)
-                    .load(imageList.get(position))
-                    .into(imageView)
+            .load(imageList.get(position))
+            .into(imageView)
 
 
         Objects.requireNonNull(container).addView(itemView)

@@ -27,13 +27,22 @@ class RocketDetailedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rocket_detailed)
 
+        val actionbar = supportActionBar
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
+
         var id = ""
-        val getAllDetailsOfRockets = RetrofitHelper.getInstance().create(GetRocketService::class.java)
+        val getAllDetailsOfRockets =
+            RetrofitHelper.getInstance().create(GetRocketService::class.java)
         val rocketDetailsRepository = RocketRepository(getAllDetailsOfRockets)
         if (intent.hasExtra("EXTRA_ID")) {
             id = intent?.getStringExtra("EXTRA_ID").toString()
         }
         Log.e("IdIS", id)
+
+
+
 
 
         viewPager = findViewById(R.id.idViewPager)
@@ -59,10 +68,18 @@ class RocketDetailedActivity : AppCompatActivity() {
 
             val uri: List<String> = it.flickr_images
             Log.e("ImgUrl", uri.toString())
-            viewPagerAdapter = ViewPagerAdapter(this@RocketDetailedActivity, uri)
+
+            viewPagerAdapter = ViewPagerAdapter(this@RocketDetailedActivity, uri,{
+
+            })
             viewPager.adapter = viewPagerAdapter
 
         })
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
