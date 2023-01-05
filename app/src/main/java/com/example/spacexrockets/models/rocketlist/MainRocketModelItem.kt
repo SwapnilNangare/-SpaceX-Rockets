@@ -1,6 +1,14 @@
 package com.example.spacexrockets.models.rocketlist
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+@Entity(tableName = "rocketTable")
 data class MainRocketModelItem(
+
+    @ColumnInfo(name = "first_name") val firstName: String?,
     var active: Boolean,
     var boosters: Int,
     var company: String,
@@ -13,6 +21,7 @@ data class MainRocketModelItem(
     var first_stage: FirstStage,
     var flickr_images: List<String>,
     var height: Height,
+    @PrimaryKey
     var id: String,
     var landing_legs: LandingLegs,
     var mass: Mass,

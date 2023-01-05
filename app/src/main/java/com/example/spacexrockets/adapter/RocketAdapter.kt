@@ -33,13 +33,9 @@ class RocketAdapter(
         holder.tv_Eg_Count.text = rocketList.get(position).engines.number.toString()
 
         var viewPagerAdapter: ViewPagerAdapter
-        var viewPager: ViewPager
-
-
         val uri: List<String> = rocketList.get(position).flickr_images
 
-
-        viewPagerAdapter = ViewPagerAdapter(context, uri,{
+        viewPagerAdapter = ViewPagerAdapter(context, uri, {
             onClickListener.invoke(rocketList.get(position).id)
         })
         holder.img_Flicker_Image.adapter = viewPagerAdapter
@@ -49,8 +45,6 @@ class RocketAdapter(
 
             onClickListener.invoke(rocketList.get(position).id)
         }
-
-
 
 
     }
@@ -64,7 +58,8 @@ class RocketAdapter(
         val tv_Country = itemView.findViewById<TextView>(R.id.tv_Country)
         val tv_Eg_Count = itemView.findViewById<TextView>(R.id.tv_Eg_Count)
         val img_Flicker_Image = itemView.findViewById<ViewPager>(R.id.img_Flicker_Image)
-        val constraintlayout_layout=itemView.findViewById<ConstraintLayout>(R.id.constraintlayout_layout)
+        val constraintlayout_layout =
+            itemView.findViewById<ConstraintLayout>(R.id.constraintlayout_layout)
 
 
     }

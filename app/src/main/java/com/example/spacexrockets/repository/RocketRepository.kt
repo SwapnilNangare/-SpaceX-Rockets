@@ -5,11 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import com.example.spacexrockets.api.GetRocketService
 import com.example.spacexrockets.models.rocketdetails.RocketDetailsModel
 import com.example.spacexrockets.models.rocketlist.MainRocketModel
+import com.example.spacexrockets.room.RocketDatabase
+import com.example.spacexrockets.utils.MyUtils
 import com.example.spacexrockets.utils.Resource
 import retrofit2.HttpException
 import java.io.IOException
 
-class RocketRepository(private val getRockets: GetRocketService) {
+class RocketRepository(private val getRockets: GetRocketService,private val rocketDatabase: RocketDatabase) {
 
     val rocketsLiveData: MutableLiveData<Resource<MainRocketModel>> = MutableLiveData()
     private val rocketsDetailsLiveData = MutableLiveData<RocketDetailsModel>()
@@ -18,10 +20,15 @@ class RocketRepository(private val getRockets: GetRocketService) {
 
 
     suspend fun getRockets() {
+
+
         rocketsLiveData.postValue(Resource.Loading())
         try {
             val result = getRockets.getRocketsInfo()
             result.body()?.let {
+
+             rocketDatabase.rocketDao().insetRocketDetails(result.body()!!)
+
                 rocketsLiveData.postValue(Resource.Success(it))
             }
         } catch (e: Exception) {

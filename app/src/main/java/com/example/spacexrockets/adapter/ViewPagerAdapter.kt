@@ -15,6 +15,7 @@ class ViewPagerAdapter(
     val context: Context, val imageList: List<String>,
     private val onClickListener: () -> Unit
 ) : PagerAdapter() {
+
     override fun getCount(): Int {
         return imageList.size
     }

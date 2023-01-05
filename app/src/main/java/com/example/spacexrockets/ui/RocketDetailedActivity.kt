@@ -10,10 +10,10 @@ import com.example.spacexrockets.R
 import com.example.spacexrockets.adapter.ViewPagerAdapter
 import com.example.spacexrockets.api.GetRocketService
 import com.example.spacexrockets.api.RetrofitHelper
+import com.example.spacexrockets.databinding.ActivityRocketDetailedBinding
 import com.example.spacexrockets.repository.RocketRepository
 import com.example.spacexrockets.viewModels.RocketDetailsViewModel
 import com.example.spacexrockets.viewModels.RocketDetailsViewModelFactory
-import kotlinx.android.synthetic.main.activity_rocket_detailed.*
 
 
 class RocketDetailedActivity : AppCompatActivity() {
@@ -22,10 +22,12 @@ class RocketDetailedActivity : AppCompatActivity() {
 
     lateinit var viewPager: ViewPager
     lateinit var viewPagerAdapter: ViewPagerAdapter
+    lateinit var binding: ActivityRocketDetailedBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rocket_detailed)
+        binding = ActivityRocketDetailedBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
@@ -56,20 +58,20 @@ class RocketDetailedActivity : AppCompatActivity() {
 
             Log.e("allDetailsOfRockets", it.toString())
 
-            tv_NameOf_top.text = it.name
-            txt_status.text = it.active.toString()
-            tv_tv_cost_per.text = it.cost_per_launch.toString()
-            txt_Success_Rate_percent.text = it.success_rate_pct.toString()
-            txt_Description.text = it.description
-            txt_Wikipedia_link.text = it.wikipedia
-            txt_height.text = it.height.feet.toString()
-            txt_Diameter.text = it.diameter.feet.toString()
+            binding.tvNameOfTop.text = it.name
+            binding.txtStatus.text = it.active.toString()
+            binding.tvTvCostPer.text = it.cost_per_launch.toString()
+            binding.txtSuccessRatePercent.text = it.success_rate_pct.toString()
+            binding.txtDescription.text = it.description
+            binding.txtWikipediaLink.text = it.wikipedia
+            binding.txtHeight.text = it.height.feet.toString()
+            binding.txtDiameter.text = it.diameter.feet.toString()
 
 
             val uri: List<String> = it.flickr_images
             Log.e("ImgUrl", uri.toString())
 
-            viewPagerAdapter = ViewPagerAdapter(this@RocketDetailedActivity, uri,{
+            viewPagerAdapter = ViewPagerAdapter(this@RocketDetailedActivity, uri, {
 
             })
             viewPager.adapter = viewPagerAdapter
