@@ -15,8 +15,8 @@ class MyApplication:Application() {
 
 
         val getRockets = RetrofitHelper.getInstance().create(GetRocketService::class.java)
+        val database = RocketDatabase.getDatabase(applicationContext)
 
-       val database = RocketDatabase.getDatabase(applicationContext)
         rocketRepository = RocketRepository(getRockets,database)
 
 

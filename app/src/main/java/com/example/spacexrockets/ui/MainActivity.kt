@@ -2,6 +2,7 @@ package com.example.spacexrockets.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-      binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
     }
 
@@ -50,6 +51,16 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    it.data?.let { rockets ->
+                        adapter = RocketAdapter(
+                            this,
+                            rockets,
+
+                            ) { rocketId ->
+                            nextActivity(rocketId)
+                        }
+                    }
+                    binding.recyclerView.adapter = adapter
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
@@ -76,5 +87,9 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, RocketDetailedActivity::class.java)
         intent.putExtra("EXTRA_ID", id)
         startActivity(intent)
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

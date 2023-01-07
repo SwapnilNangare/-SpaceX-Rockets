@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.spacexrockets.R
 import com.example.spacexrockets.models.rocketlist.MainRocketModelItem
+import com.example.spacexrockets.models.rocketlist.RocketEntity
 
 class RocketAdapter(
     val context: Context,
-    val rocketList: ArrayList<MainRocketModelItem>,
+    val rocketList: List<RocketEntity>,
     private val onClickListener: (String) -> Unit,
 ) : RecyclerView.Adapter<RocketAdapter.viewHolder>() {
 
@@ -30,10 +31,10 @@ class RocketAdapter(
         rocketList[position]
         holder.tv_Name.text = rocketList.get(position).name
         holder.tv_Country.text = rocketList.get(position).country
-        holder.tv_Eg_Count.text = rocketList.get(position).engines.number.toString()
+        holder.tv_Eg_Count.text = rocketList.get(position).engineCount.toString()
 
         var viewPagerAdapter: ViewPagerAdapter
-        val uri: List<String> = rocketList.get(position).flickr_images
+        val uri: List<String> = rocketList.get(position).images
 
         viewPagerAdapter = ViewPagerAdapter(context, uri, {
             onClickListener.invoke(rocketList.get(position).id)

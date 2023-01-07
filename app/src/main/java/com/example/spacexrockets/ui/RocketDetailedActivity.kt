@@ -12,6 +12,7 @@ import com.example.spacexrockets.api.GetRocketService
 import com.example.spacexrockets.api.RetrofitHelper
 import com.example.spacexrockets.databinding.ActivityRocketDetailedBinding
 import com.example.spacexrockets.repository.RocketRepository
+import com.example.spacexrockets.room.RocketDatabase
 import com.example.spacexrockets.viewModels.RocketDetailsViewModel
 import com.example.spacexrockets.viewModels.RocketDetailsViewModelFactory
 
@@ -35,9 +36,15 @@ class RocketDetailedActivity : AppCompatActivity() {
 
 
         var id = ""
-        val getAllDetailsOfRockets =
-            RetrofitHelper.getInstance().create(GetRocketService::class.java)
-        val rocketDetailsRepository = RocketRepository(getAllDetailsOfRockets)
+
+
+        val getAllDetailsOfRockets = RetrofitHelper.getInstance().create(GetRocketService::class.java)
+
+        val getSimpleRocket = RocketDatabase.getDatabase(this)
+
+        val rocketDetailsRepository = RocketRepository(getAllDetailsOfRockets, getSimpleRocket)
+
+
         if (intent.hasExtra("EXTRA_ID")) {
             id = intent?.getStringExtra("EXTRA_ID").toString()
         }

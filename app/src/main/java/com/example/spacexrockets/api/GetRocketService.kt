@@ -2,9 +2,11 @@ package com.example.spacexrockets.api
 
 import com.example.spacexrockets.models.rocketdetails.RocketDetailsModel
 import com.example.spacexrockets.models.rocketlist.MainRocketModel
+import com.example.spacexrockets.models.rocketlist.MainRocketModelItem
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+
 
 interface GetRocketService {
 
